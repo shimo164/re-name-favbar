@@ -1,0 +1,16 @@
+{
+	"manifest_version": 3,
+	"name": "Shorten AWS Console Shortcuts Name",
+	"version": "0.1",
+	"description": "A Chrome extension to shorten AWS service names in the console",
+	"background": {
+		"service_worker": "background.js"
+	},
+	"permissions": [
+		"activeTab",
+		"scripting"
+	],
+	"host_permissions": [
+		"*://*.console.aws.amazon.com/*"
+	]
+}
