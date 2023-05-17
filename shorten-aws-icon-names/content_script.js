@@ -1,6 +1,6 @@
 // Define a mapping of AWS service names to their shortened versions
 // TODO: Move to Options and use Local Storage
-const textMapping = {
+let textMapping = {
   'API Gateway': 'API GW',
   'Application Discovery Service': 'ADS',
   'AppStream 2.0': 'AppStream',
