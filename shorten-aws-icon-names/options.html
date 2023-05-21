@@ -14,21 +14,21 @@
       Example:
       <code>DynamoDB, DDB</code>
       <br />
-      This would map "DynamoDB" to "DDB".
+      This mapping will rename "DynamoDB" to "DDB".
     </p>
     <p>
       Example: <code>DynamoDB,</code> <br />
-      This would map "DynamoDB" to empty.
+      This mapping will remove "DynamoDB" from the display.
       <br />
     </p>
     <p>
-      By default, the suffixes "AWS" and "Amazon" are removed from service
-      names. <br />
-      However, mappings will override this behavior. <br />
+      By default, the extension removes "AWS" and "Amazon" prefixes from service
+      names.<br />
+      However, any custom mapping will override this default behavior.<br />
       Example:
       <code>Amazon Timestream, Amazon Timestream</code>
       <br />
-      This would keep "Amazon Timestream" as it is.
+      This would keep "Amazon Timestream" in its original form.
     </p>
     <textarea id="mappings" rows="35" cols="50"></textarea>
     <br />
