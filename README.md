@@ -9,23 +9,6 @@ Without shorten-aws-icon-names extension:
 With shorten-aws-icon-names extension:
 ![](img/navibar-after.png)
 
-## Settings
-
-In `content_script.js`, the preset mappings for service name abbreviations are defined within the `textMapping` object.
-
-```js
-const textMapping = {
-  'API Gateway': 'API GW',
-  ...
-```
-
-The first entry in the object means `API Gateway` will be changed to `API GW`.
-
-You can also set the name to be empty, like `API Gateway': '',`.
-
-If a service name is not specifically defined in the textMapping object, any `AWS` and `Amazon` prefixes will be removed.
-
-
 
 ## How to Install the Chrome Extension in Developer Mode
 
@@ -39,11 +22,29 @@ If a service name is not specifically defined in the textMapping object, any `AW
 For more information on using Chrome extensions in Developer mode, you can visit the [Google Chrome Enterprise Help page](https://support.google.com/chrome/a/answer/2714278?hl=en).
 
 
+## Settings
+
+Use the Options page to set custom mappings for service name abbreviations.
+
+Default mappings are provided for some services.
+
+To add a custom mapping, enter it in the format "original name, new name", with each mapping on a separate line.
+
+Example: `DynamoDB, DDB`
+This mapping will rename "DynamoDB" to "DDB".
+
+Example: `DynamoDB,`
+This mapping will remove "DynamoDB" from the display.
+
+By default, the extension removes "AWS" and "Amazon" prefixes from service names.
+However, any custom mapping will override this default behavior.
+
+Example: `Amazon Timestream, Amazon Timestream`
+This would keep "Amazon Timestream" in its original form.
+
 ## Contributing
 
 Contributions to this project are warmly welcomed! Please feel free to open an issue or submit a pull request.
 
 # TODO
-- Use Option page to change the textMapping
 - Set icons
-- Add preset mappings (if any)
