@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+  <style>
+    #mappings {
+      font-size: small;
+    }
+  </style>
+  <body>
+    <h1>Shorten AWS Service Names Mappings</h1>
+    <p>
+      To add a mapping, write it in the format "original name, new name". <br />
+      Each mapping should be on a new line. <br /><br />
+      Example:
+      <code>DynamoDB, DDB</code>
+      <br />
+      This would map "DynamoDB" to "DDB".
+    </p>
+    <p>
+      Example: <code>DynamoDB,</code> <br />
+      This would map "DynamoDB" to empty.
+      <br />
+    </p>
+    <p>
+      By default, the suffixes "AWS" and "Amazon" are removed from service
+      names. <br />
+      However, mappings will override this behavior. <br />
+      Example:
+      <code>Amazon Timestream, Amazon Timestream</code>
+      <br />
+      This would keep "Amazon Timestream" as it is.
+    </p>
+    <textarea id="mappings" rows="35" cols="50"></textarea>
+    <br />
+    <button id="saveButton">Save</button>
+    <br />
+    <button id="resetButton">Reset to Defaults</button>
+    <br />
+    <br />
+    <div id="saveMessage"></div>
+
+    <script src="options.js"></script>
+  </body>
+</html>

@@ -6,9 +6,11 @@
 	"background": {
 		"service_worker": "background.js"
 	},
+	"options_page": "options.html",
 	"permissions": [
 		"activeTab",
-		"scripting"
+		"scripting",
+		"storage"
 	],
 	"host_permissions": [
 		"*://*.console.aws.amazon.com/*"
