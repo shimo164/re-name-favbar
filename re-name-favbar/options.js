@@ -1,4 +1,4 @@
-// Default mapping between AWS service names and their shortened versions.
+// Default mapping between AWS service names and their renamed versions.
 const defaultMapping = {
   'API Gateway': 'API GW',
   'Application Discovery Service': 'ADS',
