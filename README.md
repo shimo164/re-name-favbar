@@ -1,13 +1,12 @@
-# shorten-aws-icon-names
-This Chrome extension simplifies your AWS console experience by shortening the names of AWS service icons. By automatically modifying the text in the DOM, the extension replaces the long service names with more concise abbreviations.
+# re:Name FavBar
+This Chrome extension simplifies your AWS console experience by renaming the names of AWS service icons. By automatically modifying the text in the DOM, the extension replaces the long service names with more concise abbreviations.
 
 ## Example of how the extension works
 
-Without shorten-aws-icon-names extension:
-![](img/navibar-before.png)
+Image of with and without extension:
 
-With shorten-aws-icon-names extension:
-![](img/navibar-after.png)
+![](img/navivar-before-after.png)
+
 
 
 ## How to Install the Chrome Extension in Developer Mode
@@ -45,6 +44,3 @@ This would keep "Amazon Timestream" in its original form.
 ## Contributing
 
 Contributions to this project are warmly welcomed! Please feel free to open an issue or submit a pull request.
-
-# TODO
-- Set icons

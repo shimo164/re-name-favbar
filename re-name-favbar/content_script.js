@@ -1,4 +1,4 @@
-// Define a mapping of AWS service names to their shortened versions
+// Define a mapping of AWS service names to their renamed versions
 (function () {
   // Load mappings from local storage and merge with default mappings
   chrome.storage.sync.get('textMappings', function (data) {
@@ -26,9 +26,9 @@
     return textMapping;
   }
 
-  // Main function that sets up the MutationObserver and calls the function to shorten service names.
+  // Main function that sets up the MutationObserver and calls the function to rename service names.
   function mainFunction(textMapping) {
-    function shortenServiceNames() {
+    function renameServiceNames() {
       let wasChanged = false;
 
       const node = document.querySelector(
@@ -45,7 +45,7 @@
           // If spanElement is not available yet, retry after a delay
           if (!spanElement || spanElement.innerText === '') {
             setTimeout(() => {
-              shortenServiceNames();
+              renameServiceNames();
             }, 300);
             return;
           }
@@ -66,7 +66,7 @@
           observer.disconnect();
         }
       } else {
-        setTimeout(shortenServiceNames, 300);
+        setTimeout(renameServiceNames, 300);
       }
     }
 
@@ -83,14 +83,14 @@
       };
     }
 
-    // Create a debounced version of our function to shorten service names.
-    const debouncedShortenServiceNames = debounce(shortenServiceNames, 300);
+    // Create a debounced version of our function to rename service names.
+    const debouncedRenameServiceNames = debounce(renameServiceNames, 300);
 
     // Set up a MutationObserver to watch for changes to the DOM.
     const observer = new MutationObserver(function (mutations) {
       mutations.forEach(function (mutation) {
         if (mutation.addedNodes.length > 0) {
-          debouncedShortenServiceNames();
+          debouncedRenameServiceNames();
         }
       });
     });
