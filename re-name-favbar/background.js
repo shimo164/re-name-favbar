@@ -1,40 +1,56 @@
-chrome.runtime.onInstalled.addListener((details) => {
-  if (details.reason === 'install') {
-    const defaultMapping = {
-      'API Gateway': 'API GW',
-      'Application Discovery Service': 'ADS',
-      'AppStream 2.0': 'AppStream',
-      'AWS Auto Scaling': 'ASG',
-      'Certificate Manager': 'ACM',
-      CloudFormation: 'CFN',
-      CloudFront: 'CF',
-      CloudHSM: 'HSM',
-      CloudSearch: 'CS',
-      CloudWatch: 'CW',
-      'Database Migration Service': 'DMS',
-      'Direct Connect': 'DX',
-      DynamoDB: 'DDB',
-      'Elastic Beanstalk': 'EB',
-      'Elastic Container Registry': 'ECR',
-      'Elastic Container Service': 'ECS',
-      'Elastic Kubernetes Service': 'EKS',
-      'IoT Device Management': 'IoT DM',
-      'Key Management Service': 'KMS',
-      'Managed Apache Airflow': 'MAA',
-      'Resource Access Manager': 'RAM',
-      'Route 53': 'R53',
-      'Service Catalog': 'SC',
-      'Simple Notification Service': 'SNS',
-      'Simple Queue Service': 'SQS',
-      'Step Functions': 'SF',
-      'Storage Gateway': 'SG',
-      'Systems Manager': 'SSM',
-      'Trusted Advisor': 'TA',
-      'WAF & Shield': 'WAF',
-    };
-    chrome.storage.sync.set({ textMappings: defaultMapping }, function () {
-      console.log('Default textMappings set');
-    });
+const defaultMapping = {
+  'API Gateway': 'API GW',
+  'Application Discovery Service': 'ADS',
+  'AppStream 2.0': 'AppStream',
+  'AWS Auto Scaling': 'ASG',
+  'Certificate Manager': 'ACM',
+  CloudFormation: 'CFN',
+  CloudFront: 'CF',
+  CloudHSM: 'HSM',
+  CloudSearch: 'CS',
+  CloudWatch: 'CW',
+  'Database Migration Service': 'DMS',
+  'Direct Connect': 'DX',
+  DynamoDB: 'DDB',
+  'Elastic Beanstalk': 'EB',
+  'Elastic Container Registry': 'ECR',
+  'Elastic Container Service': 'ECS',
+  'Elastic Kubernetes Service': 'EKS',
+  'IoT Device Management': 'IoT DM',
+  'Key Management Service': 'KMS',
+  'Managed Apache Airflow': 'MAA',
+  'Resource Access Manager': 'RAM',
+  'Route 53': 'R53',
+  'Service Catalog': 'SC',
+  'Simple Notification Service': 'SNS',
+  'Simple Queue Service': 'SQS',
+  'Step Functions': 'SF',
+  'Storage Gateway': 'SG',
+  'Systems Manager': 'SSM',
+  'Trusted Advisor': 'TA',
+  'WAF & Shield': 'WAF',
+};
+
+chrome.runtime.onInstalled.addListener(function (details) {
+  if (details.reason == 'install') {
+    // This is a first install!
+
+    // Set the initial state of the extension
+    chrome.storage.sync.set(
+      {
+        extensionEnabled: true, // Enable the extension
+        emptyAllNames: false, // Don't empty all service names
+        textMappings: defaultMapping, // Set the default text mappings
+      },
+      function () {
+        console.log('Initial settings have been saved');
+      },
+    );
+  } else if (details.reason == 'update') {
+    var thisVersion = chrome.runtime.getManifest().version;
+    console.log(
+      'Updated from ' + details.previousVersion + ' to ' + thisVersion + '!',
+    );
   }
 });
 

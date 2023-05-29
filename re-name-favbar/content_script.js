@@ -1,10 +1,15 @@
 // Define a mapping of AWS service names to their renamed versions
 (function () {
-  // Load mappings from local storage and merge with default mappings
-  chrome.storage.sync.get('textMappings', function (data) {
-    let textMapping = processMappings(data.textMappings || '');
-    mainFunction(textMapping);
-  });
+  chrome.storage.sync.get(
+    ['textMappings', 'extensionEnabled', 'emptyAllNames'],
+    function (data) {
+      if (!data.extensionEnabled) {
+        // If the extension is not enabled, don't do anything.
+        return;
+      }
+      mainFunction(data);
+    },
+  );
 
   // Convert the raw mappings from storage into an object for easier use.
   function processMappings(rawMappings) {
@@ -27,9 +32,12 @@
   }
 
   // Main function that sets up the MutationObserver and calls the function to rename service names.
-  function mainFunction(textMapping) {
+  function mainFunction(data) {
     function renameServiceNames() {
       let wasChanged = false;
+      let textMapping = data.emptyAllNames
+        ? {}
+        : processMappings(data.textMappings || ''); // Use an empty object if 'emptyAllNames' is true.
 
       const node = document.querySelector(
         '[data-rbd-droppable-id="global-nav-favorites-bar-list-edit-mode"]',
@@ -50,7 +58,11 @@
             return;
           }
 
-          if (textMapping.hasOwnProperty(spanElement.innerText)) {
+          if (data.emptyAllNames) {
+            // If 'emptyAllNames' is true, set all service names to be empty.
+            spanElement.innerText = '';
+            wasChanged = true;
+          } else if (textMapping.hasOwnProperty(spanElement.innerText)) {
             spanElement.innerText = textMapping[spanElement.innerText];
             wasChanged = true;
           } else {
