@@ -4,7 +4,8 @@
 	"version": "0.1",
 	"description": "Rename AWS service names of the favorite bar on the console",
 	"background": {
-		"service_worker": "background.js"
+		"service_worker": "background.js",
+		"type": "module"
 	},
 	"options_page": "options.html",
 	"permissions": [

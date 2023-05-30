@@ -2,10 +2,44 @@
 
 <html>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      background-color: #6C757D;
+      color: #FFF;
+      padding: 10px 20px;
+      text-align: left;
+    }
+    p {
+      padding: 0 20px;
+    }
     #mappings {
       font-size: small;
+      margin: 5px 20px;
+      width: calc(50ch + 2em); /* accommodate the 50 characters width and a bit of extra space for padding */
+    }
+    #toggleContainer {
+      margin: 5px 20px;
+    }
+    button {
+      margin: 5px 20px; /* Reduced the vertical margin */
+      padding: 10px;
+      background-color: #6C757D;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #5a6268;
     }
   </style>
+</html>
+
   <body>
     <h1>Rename AWS Service Names Mappings</h1>
     <p>
@@ -45,11 +79,11 @@
     </div>
     <button id="saveButton">Save</button>
     <br />
-    <button id="resetButton">Reset to Defaults</button>
+    <button id="resetButton">Reset to Default</button>
     <br />
     <br />
     <div id="saveMessage"></div>
 
-    <script src="options.js"></script>
+    <script type="module" src="options.js"></script>
   </body>
 </html>
