@@ -1,80 +1,42 @@
-const defaultMapping = {
-  'API Gateway': 'API GW',
-  'Application Discovery Service': 'ADS',
-  'AppStream 2.0': 'AppStream',
-  'AWS Auto Scaling': 'ASG',
-  'Certificate Manager': 'ACM',
-  CloudFormation: 'CFN',
-  CloudFront: 'CF',
-  CloudHSM: 'HSM',
-  CloudSearch: 'CS',
-  CloudWatch: 'CW',
-  'Database Migration Service': 'DMS',
-  'Direct Connect': 'DX',
-  DynamoDB: 'DDB',
-  'Elastic Beanstalk': 'EB',
-  'Elastic Container Registry': 'ECR',
-  'Elastic Container Service': 'ECS',
-  'Elastic Kubernetes Service': 'EKS',
-  'IoT Device Management': 'IoT DM',
-  'Key Management Service': 'KMS',
-  'Managed Apache Airflow': 'MAA',
-  'Resource Access Manager': 'RAM',
-  'Route 53': 'R53',
-  'Service Catalog': 'SC',
-  'Simple Notification Service': 'SNS',
-  'Simple Queue Service': 'SQS',
-  'Step Functions': 'SF',
-  'Storage Gateway': 'SG',
-  'Systems Manager': 'SSM',
-  'Trusted Advisor': 'TA',
-  'WAF & Shield': 'WAF',
-};
+import { defaultMapping } from './scripts/mappings.mjs';
+import { init } from './scripts/init.mjs';
 
-chrome.runtime.onInstalled.addListener(function (details) {
-  if (details.reason == 'install') {
-    // This is a first install!
-
-    // Set the initial state of the extension
-    chrome.storage.sync.set(
-      {
-        extensionEnabled: true, // Enable the extension
-        emptyAllNames: false, // Don't empty all service names
-        textMappings: defaultMapping, // Set the default text mappings
-      },
-      function () {
-        console.log('Initial settings have been saved');
-      },
-    );
-  } else if (details.reason == 'update') {
-    var thisVersion = chrome.runtime.getManifest().version;
-    console.log(
-      'Updated from ' + details.previousVersion + ' to ' + thisVersion + '!',
-    );
+// Listen for when the extension is first installed or updated
+chrome.runtime.onInstalled.addListener((details) => {
+  switch (details.reason) {
+    case 'install':
+      // This is a first-time install
+      initializeExtensionSettings();
+      break;
+    case 'update':
+      // The extension has been updated
+      logUpdateDetails(details);
+      break;
   }
 });
 
-init = (tab) => {
-  if (!tab) {
-    console.log('Tab not found');
-    return;
-  }
-
-  // Check if the tab URL matches the AWS Console pattern
-  if (/^https?:\/\/([a-z0-9-]+\.)*console\.aws\.amazon\.com\//.test(tab.url)) {
-    chrome.scripting
-      .executeScript({
-        target: { tabId: tab.id, allFrames: true },
-        files: ['content_script.js'],
-      })
-      .catch((error) => {
-        console.log(`Error executing script: ${error}`);
-      });
-  }
-};
-
+// Listen for when a tab is updated
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.status === 'complete') {
+    // The tab has finished loading, so we initialize our script
     init(tab);
   }
 });
+
+// Initializes the settings of the extension on first-time install
+function initializeExtensionSettings() {
+  chrome.storage.sync.set(
+    {
+      extensionEnabled: true, // Enable the extension by default
+      emptyAllNames: false, // Don't empty all service names by default
+      textMappings: defaultMapping, // Set the default text mappings
+    },
+    () => console.log('Initial settings have been saved'),
+  );
+}
+
+// Logs the details of the extension update
+function logUpdateDetails(details) {
+  const thisVersion = chrome.runtime.getManifest().version;
+  console.log(`Updated from ${details.previousVersion} to ${thisVersion}!`);
+}
