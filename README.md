@@ -5,7 +5,7 @@ This Chrome extension simplifies your AWS console experience by renaming the nam
 
 Image of with and without extension:
 
-![](img/navivar-before-after.png)
+![](img/navivar-examle.png)
 
 
 
