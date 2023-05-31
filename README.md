@@ -1,4 +1,5 @@
 # re:Name FavBar
+
 This Chrome extension simplifies your AWS console experience by renaming the names of AWS service icons. By automatically modifying the text in the DOM, the extension replaces the long service names with more concise abbreviations.
 
 ## Example of how the extension works
@@ -6,7 +7,6 @@ This Chrome extension simplifies your AWS console experience by renaming the nam
 Image of with and without extension:
 
 ![](img/navivar-examle.png)
-
 
 
 ## How to Install the Chrome Extension in Developer Mode
@@ -25,22 +25,32 @@ For more information on using Chrome extensions in Developer mode, you can visit
 
 Use the Options page to set custom mappings for service name abbreviations.
 
-Default mappings are provided for some services.
+- Default mappings are provided for some services. To add a custom mapping, enter it in the format "original name, new name", with each mapping on a separate line.
+- By default, the extension removes "AWS" and "Amazon" prefixes from service names. However, any custom mapping will override this default behavior.
 
-To add a custom mapping, enter it in the format "original name, new name", with each mapping on a separate line.
+### Custom Mapping Examples
 
-Example: `DynamoDB, DDB`
-This mapping will rename "DynamoDB" to "DDB".
+Here are some examples of how to use custom mappings:
 
-Example: `DynamoDB,`
-This mapping will remove "DynamoDB" from the display.
+| Mapping | Description|
+|---|---|
+|`DynamoDB, DDB`|Rename "DynamoDB" to "DDB"|
+|`DynamoDB,`|Remove "DynamoDB" from the display|
+|`Amazon Timestream, Amazon Timestream`|Keep "Amazon Timestream" in its original form|
 
-By default, the extension removes "AWS" and "Amazon" prefixes from service names.
-However, any custom mapping will override this default behavior.
+### Toggle Options
 
-Example: `Amazon Timestream, Amazon Timestream`
-This would keep "Amazon Timestream" in its original form.
+There are also two toggle buttons that provide further customization.
 
+| Toggle | Default |Description|
+|---|---|---|
+|`Enable Extension`|On|Extension will active and apply the mappings to the service names|
+|`Empty All Service Names`|Off|All service names will be removed from display, regardless of the mappings specified|
+
+
+### Note: Display Update Delay
+
+When you open an AWS Console page, you may initially see the original AWS service names. This is because the extension needs to read the page's Document Object Model (DOM) and then rewrite the navigation bar sections to apply the renamed service names. This operation takes a small amount of time.
 ## Contributing
 
 Contributions to this project are warmly welcomed! Please feel free to open an issue or submit a pull request.
