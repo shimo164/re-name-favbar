@@ -93,8 +93,8 @@ function convertStringToMappings(string) {
   const lines = string.split('\n');
   lines.forEach((line) => {
     const [key, value] = line.split(',');
-    if (key && value) {
-      mappings[key.trim()] = value.trim();
+    if (key) {
+      mappings[key.trim()] = value ? value.trim() : '';
     }
   });
   return mappings;
