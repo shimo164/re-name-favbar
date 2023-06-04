@@ -2,12 +2,15 @@
 
 This Chrome extension simplifies your AWS console experience by renaming the names of AWS service icons. By automatically modifying the text in the DOM, the extension replaces the long service names with more concise abbreviations.
 
+## Released version
+
+You can also find re:Name FavBar on [Chrome Web Store](https://chrome.google.com/webstore/detail/rename-favbar/djibddceopnloddkfmgekaejflcnadli).
+
+![](img/chrome-we-store-rename-favbar.png)
+
 ## Example of how the extension works
 
-Image of with and without extension:
-
-![](img/navivar-examle.png)
-
+![](img/rename-favbar_v2.png)
 
 ## How to Install the Chrome Extension in Developer Mode
 
@@ -22,6 +25,11 @@ For more information on using Chrome extensions in Developer mode, you can visit
 
 
 ## Settings
+
+Options page:
+
+![](img/rename-favbar_v3.png)
+
 
 Use the Options page to set custom mappings for service name abbreviations.
 
